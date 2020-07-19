@@ -9,11 +9,11 @@ using src.Auth.DATA.Entities;
 
 namespace Auth.API.Services
 {
-   public class AuthenticateService : IAuthenticateService
+   public class AuthService : IAuthService
    {
       private readonly UserManager<ApplicationUser> _userManager;
 
-      public AuthenticateService(UserManager<ApplicationUser> userManager)
+      public AuthService(UserManager<ApplicationUser> userManager)
       {
          _userManager = userManager;
       }

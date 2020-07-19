@@ -9,22 +9,21 @@ namespace Auth.API.Controllers
    [ApiController]
    public class AuthenticationController : ControllerBase
    {
-      private readonly IAuthenticateService _authService;
+      private readonly IAuthService _authService;
 
-      public AuthenticationController(IAuthenticateService authService)
+      public AuthenticationController(IAuthService authService)
       {
          _authService = authService;
       }
-      [HttpPost("/regiser")]
+
+      [HttpPost("/register")]
       public async Task<IActionResult> Register(RegisterModel model)
       {
 
          try
          {
-            if (!ModelState.IsValid)
-            {
-               throw new ArgumentNullException(message: "Invalid Details Provided", null);
-            }
+            if (!ModelState.IsValid) throw new ArgumentNullException(message: "Invalid Details Provided", null);
+
             var userName = await _authService.RegisterUser(model);
             return new CreatedResult("/register/", new { Username = userName, message = "User account created successfully" });
          }
@@ -34,16 +33,16 @@ namespace Auth.API.Controllers
          }
       }
 
-      [HttpGet("/login")]
-      public IActionResult Login()
-      {
-         throw new NotImplementedException();
-      }
+      // [HttpGet("/login")]
+      // public IActionResult Login()
+      // {
+      //    throw new NotImplementedException();
+      // }
 
-      [HttpGet("/logout")]
-      public IActionResult Logout()
-      {
-         throw new NotImplementedException();
-      }
+      // [HttpGet("/logout")]
+      // public IActionResult Logout()
+      // {
+      //    throw new NotImplementedException();
+      // }
    }
 }
